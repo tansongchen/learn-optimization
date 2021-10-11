@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage[hmargin=1in,vmargin=1.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{bm}
+\newcommand{\A}{\bm A}
+\newcommand{\x}{\bm x}
+\newcommand{\y}{\bm y}
+\newcommand{\z}{\bm z}
+\renewcommand{\a}{\bm a}
+\renewcommand{\b}{\bm b}
+\renewcommand{\c}{\bm c}
+\renewcommand{\d}{\bm d}
+\renewcommand{\v}{\bm v}
+\newcommand{\p}{\bm p}
+\newcommand{\q}{\bm q}
+\newcommand{\1}{\bm 1}
+\title{Homework 2}
+\author{Xinyi Gu, Songchen Tan}
+\date{\today}
+\begin{document}
+\maketitle
+\section{}
+When we convert the polyhedron in the form $\A\x\ge\b$ to $\A'\x'=\b',\x'\ge0$, we will add a new variable for each inequality, therefore the extreme point in the standard form is not related to the extreme point in the geometric form. For example, $1x_1+0x_2\ge0$ is a valid polyhedron in $\mathbb R^2$ with no extreme points, and its corresponding standard form $x_1^+-x_1^--x_3=0, \x'=(x_1^+,x_1^-,x_2^+,x_2^-,x_3)\ge0$ has an extreme point $(0, 0, 0, 0, 0)$, which does not correspond to an extreme point in the standard form.
+
+\section{}
+We denote $\z=(\x^T,\y^T)^T$, $\v=(\c^T,\d^T)^T$ such that we can reformulate the problem into minimizing $v'z$ subject to $(A, B)z=b$, $(D, 0)z\le f$ and $(0, G)z\le g$.
+
+The dual problem is therefore maximizing $p'b+q'f+r'g$ where $p\in\mathbb R^{p_1}, q\in\mathbb R^{p_2}, r\in\mathbb R^{p_3}$, subject to
+
+$$
+\begin{cases}
+    q\le 0\\
+    r\le 0\\
+    p'A+q'D=c\\
+    p'B+r'G=d
+\end{cases}
+$$
+
+Using the given data, we obtained that the optimal solution $\approx -236.41$ for both the primal and dual problem. (See code \verb|3.jl|.)
+\section{}
+
+We start the proof by showing that (b) $\Rightarrow$ (a) is easy. If (b) holds, for all $\x>0$,
+
+$$
+\a^T\x=\sum_{j=1}^na_jx_j
+\le\sum_{j=1}^n\sum_{i=1}^m\lambda_i(\a_{i})_j
+=\sum_{i=1}^m\lambda_i(\a_i)^T\x\le\max_i(\a_i)^T\x
+$$
+
+Then we consider the LO problem: $\min z-\a^T\x$, subject to $(\a_i)^Tx-z\le 0$ ($i=1,\cdots,m$) and $x\ge0$. If (a) holds, then $z\ge\max_i(\a_i)^T\x\ge\a^Tx$, so the objective function is bounded. This problem is also feasible since $z$ is free. Now we denote $\y=-\x$ and define the resulting formulation as the primal problem: $\min \a^T\y+z$, subject to $(\a_i)^Ty+z\ge 0$ and $\y\le 0$. The dual of this problem would be $\max 0$, subject to
+
+$$
+\begin{cases}
+(\lambda_1,\cdots,\lambda_m)\begin{pmatrix}
+    \a_1^T\\\a_2^T\\\vdots\\\a_m^T
+\end{pmatrix}
+\ge\a^T\\
+\sum_{i=1}^m\lambda_i=1\\
+\lambda_i\ge0
+\end{cases}
+$$
+
+According to the duality theorem, this problem is feasible, so (b) holds.
+
+\end{document}
