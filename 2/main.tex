@@ -23,10 +23,12 @@
 \begin{document}
 \maketitle
 \section{}
-When we convert the polyhedron in the form $\A\x\ge\b$ to $\A'\x'=\b',\x'\ge0$, we will add a new variable for each inequality, therefore the extreme point in the standard form is not related to the extreme point in the geometric form. For example, $1x_1+0x_2\ge0$ is a valid polyhedron in $\mathbb R^2$ with no extreme points, and its corresponding standard form $x_1^+-x_1^--x_3=0, \x'=(x_1^+,x_1^-,x_2^+,x_2^-,x_3)\ge0$ has an extreme point $(0, 0, 0, 0, 0)$, which does not correspond to an extreme point in the standard form.
+When we convert the polyhedron in the geometric form $\A\x\ge\b$ to standard form $\A'\x'=\b',\x'\ge0$, we will add a new variable for each inequality, therefore the extreme point in the standard form is not related to the extreme point in the geometric form. For example, $1x_1+0x_2\ge0$ is a valid polyhedron in $\mathbb R^2$ with no extreme points, and its corresponding standard form $x_1^+-x_1^--x_3=0, \x'=(x_1^+,x_1^-,x_2^+,x_2^-,x_3)\ge0$ has an extreme point $(0, 0, 0, 0, 0)$, which does not correspond to an extreme point in the geometric form.
 
 \section{}
-We denote $\z=(\x^T,\y^T)^T$, $\v=(\c^T,\d^T)^T$ such that we can reformulate the problem into minimizing $v'z$ subject to $(A, B)z=b$, $(D, 0)z\le f$ and $(0, G)z\le g$.
+
+\section{}
+We denote $z=(x',y')'$, $v=(c',d')'$ such that we can reformulate the problem into minimizing $v'z$ subject to $(A, B)z=b$, $(D, 0)z\le f$ and $(0, G)z\le g$.
 
 The dual problem is therefore maximizing $p'b+q'f+r'g$ where $p\in\mathbb R^{p_1}, q\in\mathbb R^{p_2}, r\in\mathbb R^{p_3}$, subject to
 
@@ -40,6 +42,84 @@ $$
 $$
 
 Using the given data, we obtained that the optimal solution $\approx -236.41$ for both the primal and dual problem. (See code \verb|3.jl|.)
+
+\section{}
+\subsection{}
+
+We denote the polynomial coefficients $a_0, \cdots, a_d$, so that the minimization problem is defined as
+
+$$
+\min_{a_i, i = 0,\cdots, d}\max_{j=1,\cdots,N}|f(x_j) - (a_0+a_1x_j^1+\cdots+a_dx_j^d)|
+$$
+
+Given $a_i$, let $m>0$ be the maximum, then we can express the problem as a LO over variables $\{a_i|i=0,\cdots,d\} \cup \{m\}$ that minimizes $m$ subject to
+
+$$
+\begin{cases}
+    m \ge 0\\
+    m \ge + f(x_j) - (a_0 + a_1x_j^1+\cdots+a_dx_j^d) & \forall j=1, \cdots, N\\
+    m \ge - f(x_j) + (a_0 + a_1x_j^1+\cdots+a_dx_j^d) & \forall j=1, \cdots, N\\
+\end{cases}
+$$
+
+\subsection{}
+
+The approximation Chebyshev polynomials and the approximation errors are shown below.
+
+\begin{figure}[!ht]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{polynomial.png}
+        \caption{Polynomials}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{error.png}
+        \caption{Errors}
+    \end{subfigure}
+       \caption{The Chebyshev polynomial and error for $d=0,1,2,3,4$}
+\end{figure}
+
+\subsection{}
+
+We notice that the Chebyshev polynomials are visually closer to the original function $e^x$ in the given interval $[-1, 1]$. This is because Chebyshev polynomials consider all points in the interval and Taylor polynomials only consider the function value and derivatives at 0.
+
+\begin{figure}[!ht]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{compare-0.png}
+        \caption{$\deg p=0$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{compare-1.png}
+        \caption{$\deg p=1$}
+    \end{subfigure}
+    \newline
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{compare-2.png}
+        \caption{$\deg p=2$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{compare-3.png}
+        \caption{$\deg p=3$}
+    \end{subfigure}
+    \newline
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{compare-4.png}
+        \caption{$\deg p=4$}
+    \end{subfigure}
+    \caption{Comparison of Chebyshev polynomials and Taylor polynomials}
+\end{figure}
+
 \section{}
 
 We start the proof by showing that (b) $\Rightarrow$ (a) is easy. If (b) holds, for all $\x>0$,
