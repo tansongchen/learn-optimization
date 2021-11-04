@@ -27,6 +27,21 @@ When we convert the polyhedron in the geometric form $\A\x\ge\b$ to standard for
 
 \section{}
 
+Dual problem:
+
+\begin{align*}
+    \max \quad & 3p_2 + 6 p_3  \\
+    \text{s.t.} \quad & p_1 \leq 0 \\
+    & p_2 \geq 0\\
+    & p_3 \quad \text{free}\\
+    & 2p_1 + 3p_2 - p_3 \geq 1 \\
+    & 3p_1 + p_2 - p_3 \leq -1 \\
+    & -p_1 + 4p_2 + 2p_3 \leq 0 \\
+    & p_1 - 2p_2 + p_3 = 0
+\end{align*}
+
+
+
 \section{}
 We denote $z=(x',y')'$, $v=(c',d')'$ such that we can reformulate the problem into minimizing $v'z$ subject to $(A, B)z=b$, $(D, 0)z\le f$ and $(0, G)z\le g$.
 
@@ -44,7 +59,7 @@ $$
 Using the given data, we obtained that the optimal solution $\approx -236.41$ for both the primal and dual problem. (See code \verb|3.jl|.)
 
 \section{}
-\subsection{}
+\subsection*{(a)}
 
 We denote the polynomial coefficients $a_0, \cdots, a_d$, so that the minimization problem is defined as
 
@@ -62,9 +77,33 @@ $$
 \end{cases}
 $$
 
-\subsection{}
+\subsection*{(b)}
+Dual problem:
 
-The approximation Chebyshev polynomials and the approximation errors are shown below.
+Two primal constraints in (a), set dual variables as $p^{+}_j$ and $p^{-}_j$.
+
+\begin{align*}
+    \max \quad & \sum^{N}_{j=1} f(x_j)(p^{+}_j - p^{-}_j) & \\
+    \text{s.t.} \quad & \sum^{N}_{j=1}(p^{+}_j + p^{-}_j) = 1 \\
+    & \sum^{N}_{j=1}x^{i}_j (p^{+}_j - p^{-}_j) = 0, & i = 0, 1, \cdots, d \\
+    & p^{+}_j, p^{-}_j \geq 0, & j = 1, \cdots, N
+\end{align*}
+
+\subsection*{(c)}
+complementary slackness conditions:
+
+$$
+\begin{cases}
+    (m - f(x_j) + (a_0 + a_1x_j^1+\cdots+a_dx_j^d)) p^{+}_j = 0 & \forall j=1, \cdots, N\\
+    (m + f(x_j) - (a_0 + a_1x_j^1+\cdots+a_dx_j^d)) p^{-}_j = 0 & \forall j=1, \cdots, N\\
+\end{cases}
+$$
+
+When $p^{+}_j, p^{-}_j > 0$, $m = |f(x_j) - p(x_j)|$, get maximum approximation error when $x_j$. From (b), we know that there are d+2 constraints in dual problem, results at most d+2 positive valunes in the optimal basic solutionmeans, means at most d+2 $x_j$ points get the maximum approximation error. 
+
+\subsection*{(d)}
+
+The approximation Chebyshev polynomials and the approximation errors are shown below. See Fig. 1.
 
 \begin{figure}[!ht]
     \centering
@@ -82,9 +121,9 @@ The approximation Chebyshev polynomials and the approximation errors are shown b
        \caption{The Chebyshev polynomial and error for $d=0,1,2,3,4$}
 \end{figure}
 
-\subsection{}
+\subsection*{(e)}
 
-We notice that the Chebyshev polynomials are visually closer to the original function $e^x$ in the given interval $[-1, 1]$. This is because Chebyshev polynomials consider all points in the interval and Taylor polynomials only consider the function value and derivatives at 0.
+We notice that the Chebyshev polynomials are visually closer to the original function $e^x$ in the given interval $[-1, 1]$. This is because Chebyshev polynomials consider all points in the interval and Taylor polynomials only consider the function value and derivatives at 0. See Fig. 2 in P4.
 
 \begin{figure}[!ht]
     \centering

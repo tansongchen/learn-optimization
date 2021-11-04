@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage[hmargin=1in,vmargin=1.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{bm}
+\newcommand{\A}{\bm A}
+\newcommand{\x}{\bm x}
+\newcommand{\y}{\bm y}
+\newcommand{\z}{\bm z}
+\renewcommand{\a}{\bm a}
+\renewcommand{\b}{\bm b}
+\renewcommand{\c}{\bm c}
+\renewcommand{\d}{\bm d}
+\renewcommand{\v}{\bm v}
+\newcommand{\p}{\bm p}
+\newcommand{\q}{\bm q}
+\newcommand{\1}{\bm 1}
+\title{Homework 3}
+\author{Xinyi Gu, Songchen Tan}
+\date{\today}
+\begin{document}
+\maketitle
+\section{}
+
+
+\section{}
+
+
+
+
+
+\section{}
+
+
+\section{}
+\subsection{}
+\begin{align*}
+    \min \quad & x_1 + x_2 + x_3  \\
+    \text{s.t.} \quad & x_1 + 2x_2+5x_3 = C \\
+    & x_1, x_2, x_3 \in \mathbb{Z}^{n}_+
+\end{align*}
+
+Integer constraints can't be relaxed. Example:
+
+Constraint relaxed formulation:
+
+\begin{align*}
+    \min \quad & x_1 + x_2 + x_3  \\
+    \text{s.t.} \quad & x_1 + 2x_2+5x_3 = C \\
+    & x_1, x_2, x_3 \geq 0
+\end{align*}
+
+x = (1,2,2) is an optimal solution when C = 13 for the formulation with integer constraints. The optimal solution can be achieved when we use the 3rd kinds of coin only, if the integer constraints are relaxed, eg. x = (0,0,2.6).
+
+\subsection{}
+\begin{align*}
+    \max \quad & \sum^{n}_{i=1}\sum^{n}_{j=1} c_{ij}x_{ij}   \\
+    \text{s.t.} \quad & \sum^{n}_{j=1} x_{ij} = 1, & i = 1, ..., n \\
+    & \sum^{n}_{i=1} x_{ij} = 1, & j = 1, ..., n\\
+    & x_{ij} \in \{0, 1\}
+\end{align*}
+
+Relaxed constraints:
+\begin{align*}
+    \min \quad & \sum^{n}_{i=1}\sum^{n}_{j=1} -c_{ij}x_{ij}   \\
+    \text{s.t.} \quad & \sum^{n}_{j=1} x_{ij} = 1, & i = 1, ..., n \\
+    & \sum^{n}_{i=1} x_{ij} = 1, & j = 1, ..., n\\
+    & x_{ij} \geq 0 & \forall i,j
+\end{align*}
+
+The relaxed constraints formulation becomes an assignment problem. 
+(a), $x_{ij} \leq 1$ is implised by constraints we have.
+(b), by corollary 7.2, the assignment problem always has an integer optimal solution, i.e., in such problems when optimal cost is finite, all supplies are equal to 1 in this problem which is an integer, there exists and integer optimal flow vector.
+$(a), (b) \Rightarrow x_{ij} \in \{0, 1\}$ 
+
+
+\section{}
+
+
+\end{document}
