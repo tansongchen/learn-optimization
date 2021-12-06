@@ -1,0 +1,115 @@
+\documentclass{article}
+\usepackage[hmargin=1in,vmargin=1.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{bm}
+\newcommand{\x}{\bm x}
+\title{Homework 5}
+\setcounter{MaxMatrixCols}{20}
+\author{Xinyi Gu, Songchen Tan}
+\date{\today}
+\begin{document}
+\maketitle
+\section{}
+\subsection*{(a)}
+Denoting the quadratic function $f$, we have $\nabla f=Ax+b$ and $H_f=A$. The exact solution $x^*=-A^{-1}b$. Applying the Newton's method to arbitrary $x_0$, we get
+
+$$
+x_1=x_0-H_f^{-1}\nabla f(x_0)=x_0-A^{-1}(Ax_0+b)=-A^{-1}b
+$$
+
+Threrfore the Newton's method converges in one step.
+
+\subsection*{(b)}
+We will need $x^*=-A^{-1}b=x_0-\alpha \nabla f(x_0)$ for some $\alpha$. Therefore
+
+$$
+\begin{aligned}
+    -A^{-1}b&=x_0-\alpha \nabla f(x_0)\\
+    -A^{-1}b&=x_0-\alpha (Ax_0+b)\\
+    \alpha (Ax_0+b)&=x_0+A^{-1}b\\
+    A\alpha (Ax_0+b)&=(Ax_0+b)
+\end{aligned}
+$$
+
+Therefore $Ax_0+b$ need to be either zero or an eigenvector of $A$.
+
+\section{}
+\section{}
+\subsection*{(a)}
+
+$$
+\min_{(x,y)\in\mathbb R^2}\sum_i(x-x_i)^2+(y-y_i)^2
+$$
+\subsection*{(b)}
+
+The objective function $f$ is differentiable, because
+
+$$
+\nabla f=\left(\sum_i2(x-x_i),\sum_i2(y-y_i)\right)
+$$
+
+The problem is convex because for $r=(x,y)$ and $r'=(x',y')$
+
+$$
+\begin{aligned}
+    &f(\theta r+(1-\theta)r')-\theta f(r)-(1-\theta)f(r')\\
+    =&\sum_i(\theta x+(1-\theta)x'-x_i)^2+(\theta y+(1-\theta)y'-y_i)^2-\theta(x-x_i)^2-(1-\theta)(y-y_i)^2\\
+    =&\sum_i(\theta^2-\theta)[(x-x_i)^2+(x'-x_i)^2+(y-y_i)^2+(y'-y_i)^2]+2(\theta^2-\theta)[(x-x_i)(x'-x_i)+(y-y_i)(y'-y_i)]\\
+    =&\sum_i(\theta^2-\theta)[(x+x'-2x_i)^2+(y+y'-2y_i)^2]\\
+    \le&0
+\end{aligned}
+$$
+
+\subsection*{(c)}
+
+Since the problem is convex we only need $\nabla f=0$, which is
+
+$$
+\sum_i2(x-x_i)=\sum_i2(y-y_i)=0
+$$
+
+\subsection*{(d)}
+$$
+(x^*,y^*)=\frac1n\left(\sum_ix_i,\sum_iy_i\right)
+$$
+\section{}
+\subsection*{(a)}
+
+We only need to prove that the objective function $f$ is non-convex. By random trying we can get
+
+$x=(1.0697822217051507, 1.1327854135005468, 1.707087600826763)$
+
+and
+
+$x'=(1.1270384303960612, 1.4248690078210067, 1.4724353082361537)$
+
+such that $f(x)+f(x')<2f((x+x')/2)$.
+
+\subsection*{(b)}
+
+Changing variable $x_i=e^{z_i}$, we get $\min_{z_1,z_2,z_3}\exp(-z_1+2z_2+3z_3)$ subject to $11z_1-12z_2+13z_3\le\log 14$ and $15z_1+16z_2-17z_3\le\log 18$ and $z_1,z_2,z_3\ge0$. Since $e^z$ is a strictly monotonic increasing function of $z$, the objective function can be changed to $\min_{z_1,z_2,z_3}-z_1+2z_2+3z_3$. This is then solvable by simplex method.
+
+\subsection*{(c)}
+
+Changing variable $x_i=e^{z_i}$, we get $\min_{z_1,z_2,z_3}\exp(-z_1+2z_2+3z_3)+5\exp(4z_1+5z_2-6z_3)$ subject to $11z_1-12z_2+13z_3\le\log 14$ and $\log(\exp(15z_1+16z_2-17z_3)+7\exp(18z_1-19z_2+20z_3))\le\log 21$ and $z_1,z_2,z_3\ge0$. We notice that the objective function and the second constraint share the same structure, so it suffices to prove that a function $\mathbb R^3\to\mathbb R$ of form
+
+$$
+f(z)=\log(\exp(az_1+bz_2+cz_3)+r\exp(a'z_1+b'z_2+c'z_3))
+$$
+
+is convex. To prove this, we denote $g(y)=\log(e^{y_1}+e^{y_2})$ and $h(z)=(az_1+bz_2+cz_3,a'z_1+b'z_2+c'z_3+\log r)$ such that $h\circ g=f$. So
+
+$$
+\begin{aligned}
+    f(\theta z+(1-\theta)z')
+    &=g(h(\theta z+(1-\theta)z'))\\
+    &=g(\theta h(z)+(1-\theta)h(z'))&\text{linearity of $h$}\\
+    &\le\theta g(h(z))+(1-\theta)g(h(z'))&\text{convexity of $g$}\\
+    &=\theta f(z)+(1-\theta)f(z')
+\end{aligned}
+$$
+
+\end{document}
